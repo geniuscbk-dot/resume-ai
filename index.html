@@ -6,75 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Resume A.I.</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<script>
-function parseDocx(arrayBuffer, callback) {
-  try {
-    var bytes = new Uint8Array(arrayBuffer);
-    var str = '';
-    for (var i = 0; i < bytes.length; i++) {
-      str += String.fromCharCode(bytes[i]);
-    }
-    var b64 = btoa(str);
-    var zip = new JSZip();
-    // JSZip 없이 직접 파싱 시도 - PK 헤더 확인
-    if (bytes[0] === 0x50 && bytes[1] === 0x4B) {
-      // docx는 ZIP — 내부 XML 찾기
-      var text = extractTextFromDocx(bytes);
-      callback(null, text);
-    } else {
-      callback('ZIP 형식이 아닙니다');
-    }
-  } catch(e) {
-    callback(e.message);
-  }
-}
-
-function extractTextFromDocx(bytes) {
-// ZIP 파일에서 word/document.xml 찾기
-var content = ‘’;
-var i = 0;
-var arr = bytes;
-var len = arr.length;
-
-while (i < len - 4) {
-// Local file header: PK\x03\x04
-if (arr[i]===0x50 && arr[i+1]===0x4B && arr[i+2]===0x03 && arr[i+3]===0x04) {
-var compMethod = arr[i+8] | (arr[i+9]<<8);
-var compSize = arr[i+18] | (arr[i+19]<<8) | (arr[i+20]<<16) | (arr[i+21]<<24);
-var uncompSize = arr[i+22] | (arr[i+23]<<8) | (arr[i+24]<<16) | (arr[i+25]<<24);
-var fnLen = arr[i+26] | (arr[i+27]<<8);
-var extLen = arr[i+28] | (arr[i+29]<<8);
-var fnBytes = arr.slice(i+30, i+30+fnLen);
-var fname = ‘’;
-for (var j = 0; j < fnBytes.length; j++) fname += String.fromCharCode(fnBytes[j]);
-var dataStart = i + 30 + fnLen + extLen;
-
-```
-  if (fname === 'word/document.xml' && compMethod === 0) {
-    // 비압축 저장
-    var xmlBytes = arr.slice(dataStart, dataStart + uncompSize);
-    var xml = '';
-    for (var k = 0; k < xmlBytes.length; k++) xml += String.fromCharCode(xmlBytes[k]);
-    content = xml
-      .replace(/<w:br[^>]*\/?>/gi, '\n')
-      .replace(/<\/w:p>/gi, '\n')
-      .replace(/<[^>]+>/g, '')
-      .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"').replace(/&#xD;/g, '\n')
-      .replace(/\n{3,}/g, '\n\n').trim();
-    break;
-  }
-  i = dataStart + compSize;
-} else {
-  i++;
-}
-```
-
-}
-return content;
-}
-</script>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#f0f4fa;color:#1a1a2e;font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
@@ -172,7 +103,6 @@ header{background:#fff;border-bottom:1px solid #d8e2f0;padding:0 20px;height:56p
 .loading-text{font-size:15px;color:#1a1a2e;font-weight:700;text-align:center;}
 .loading-sub{font-size:12px;color:#8890a4;}
 </style>
-
 </head>
 <body>
 <header>
@@ -356,17 +286,21 @@ r.readAsText(file, ‘UTF-8’);
 } else if (file.name.match(/.docx$/i)) {
 var r2 = new FileReader();
 r2.onload = function(e) {
-try {
-var bytes = new Uint8Array(e.target.result);
-var text = extractTextFromDocx(bytes);
-if (text && text.trim().length > 0) {
-onSuccess(text);
+var b64 = btoa(String.fromCharCode.apply(null, new Uint8Array(e.target.result)));
+fetch(WORKER_URL + “/?type=extract”, {
+method: “POST”,
+headers: { “Content-Type”: “application/json” },
+body: JSON.stringify({ file: b64, filename: file.name })
+})
+.then(function(res) { return res.json(); })
+.then(function(data) {
+if (data.text && data.text.trim().length > 0) {
+onSuccess(data.text);
 } else {
-onFail(‘Word 파일에서 텍스트를 읽을 수 없어요. 직접 붙여넣기 해주세요.’);
+onFail(‘Word 파일 텍스트 추출 실패 — 직접 붙여넣기 해주세요’);
 }
-} catch(err) {
-onFail(‘Word 파일 읽기 실패 — 직접 붙여넣기 해주세요’);
-}
+})
+.catch(function() { onFail(‘Word 파일 업로드 실패 — 직접 붙여넣기 해주세요’); });
 };
 r2.onerror = function() { onFail(); };
 r2.readAsArrayBuffer(file);

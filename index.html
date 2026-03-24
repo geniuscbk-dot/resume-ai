@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Resume A.I.</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#f0f4fa;color:#1a1a2e;font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
@@ -287,9 +287,27 @@ r.readAsText(file, ‘UTF-8’);
 } else if (file.name.match(/.docx$/i)) {
 var r2 = new FileReader();
 r2.onload = function(e) {
-mammoth.extractRawText({ arrayBuffer: e.target.result })
-.then(function(res) { onSuccess(res.value); })
-.catch(function() { onFail(‘Word 파일 읽기 실패 — 직접 붙여넣기 해주세요’); });
+try {
+JSZip.loadAsync(e.target.result).then(function(zip) {
+var docFile = zip.file(‘word/document.xml’);
+if (!docFile) { onFail(‘Word 파일 구조를 읽을 수 없어요.’); return; }
+docFile.async(‘string’).then(function(xml) {
+var text = xml
+.replace(/<w:br[^>]*>/gi, ‘\n’)
+.replace(/<w:p[ >][^>]*>/gi, ‘\n’)
+.replace(/<[^>]+>/g, ‘’)
+.replace(/&/g, ‘&’)
+.replace(/</g, ‘<’)
+.replace(/>/g, ‘>’)
+.replace(/"/g, ‘”’)
+.replace(/
+/g, ‘\n’)
+.replace(/\n{3,}/g, ‘\n\n’)
+.trim();
+onSuccess(text);
+}).catch(function() { onFail(‘Word 파일 읽기 실패 — 직접 붙여넣기 해주세요’); });
+}).catch(function() { onFail(‘Word 파일 읽기 실패 — 직접 붙여넣기 해주세요’); });
+} catch(err) { onFail(‘Word 파일 읽기 실패 — 직접 붙여넣기 해주세요’); }
 };
 r2.onerror = function() { onFail(); };
 r2.readAsArrayBuffer(file);

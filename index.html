@@ -340,6 +340,10 @@ function setupUpload(fileId, textareaId, areaId, uploadTxtId, changeTxtId, previ
     var textarea = document.getElementById(textareaId);
 
     function onSuccess(text) {
+      if(!text || text.trim().length === 0) {
+        onFail('파일에서 텍스트를 읽을 수 없어요. 직접 붙여넣기 해주세요.');
+        return;
+      }
       textarea.value = text;
       textarea.style.display = 'none';
       fname.textContent = '📄 ' + file.name;
@@ -348,12 +352,14 @@ function setupUpload(fileId, textareaId, areaId, uploadTxtId, changeTxtId, previ
       area.classList.add('has-file');
       uploadTxt.textContent = '📄 ' + file.name;
       changeTxt.style.display = 'inline';
+      showToast('✅ ' + file.name + ' 업로드 완료!', 'success');
     }
     function onFail(msg) {
-      area.classList.add('has-file');
-      uploadTxt.textContent = msg || '⚠️ 직접 붙여넣기 필요';
-      changeTxt.style.display = 'inline';
+      area.classList.remove('has-file');
+      uploadTxt.textContent = '📎 파일 업로드';
+      changeTxt.style.display = 'none';
       textarea.style.display = 'block';
+      showToast('⚠️ ' + (msg || '파일 읽기 실패 — 직접 붙여넣기 해주세요'), 'error');
     }
 
     if(file.name.match(/\.(txt|md)$/i)) {
@@ -491,6 +497,12 @@ setTimeout(function(){btn.textContent=‘공유’;},2000);
 });}
 });
 
+function showToast(msg, type) {
+var t = document.getElementById(‘toast’);
+t.textContent = msg;
+t.className = ‘toast ’ + (type||‘success’) + ’ show’;
+setTimeout(function() { t.classList.remove(‘show’); }, 3000);
+}
 function setStep(n){
 [1,2,3,4].forEach(function(i){
 var el=document.getElementById(‘step’+i);

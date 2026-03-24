@@ -10,51 +10,27 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#f0f4fa;color:#1a1a2e;font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
-
-/* 헤더 */
 header{background:#fff;border-bottom:1px solid #d8e2f0;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;}
-.logo{font-family:‘Cormorant Garamond’,serif;font-size:20px;font-weight:600;color:#2d6be4;}
+.logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#2d6be4;}
 .logo-sub{font-size:10px;color:#8890a4;margin-left:6px;}
 .ai-badge{font-size:10px;font-weight:700;color:#2d6be4;background:#e8f0fe;border:1px solid #c5d8fb;padding:3px 10px;border-radius:20px;}
-
-/* 보안 배너 */
 .security-banner{background:#e6f4ec;border-bottom:1px solid #a8d5b8;padding:10px 20px;}
 .security-text{font-size:12px;color:#2e7d52;font-weight:500;}
-
 .main{padding:20px 16px 40px;max-width:720px;margin:0 auto;}
-
-/* 단계 칩 — 흰 배경에 검은 글씨 기본 */
 .steps{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;}
 .steps::-webkit-scrollbar{display:none;}
-.step-chip{
-display:flex;align-items:center;gap:6px;
-padding:8px 16px;border-radius:20px;
-border:2px solid #d8e2f0;
-background:#ffffff;
-font-size:12px;font-weight:700;
-color:#3d3d5c;
-white-space:nowrap;flex-shrink:0;
-transition:all .2s;
-}
-.step-chip .step-num{
-width:20px;height:20px;border-radius:50%;
-background:#e8edf5;
-display:flex;align-items:center;justify-content:center;
-font-size:10px;font-weight:700;color:#3d3d5c;
-}
-.step-chip.active{border-color:#2d6be4;background:#2d6be4;color:#ffffff;}
+.step-chip{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;border:2px solid #d8e2f0;background:#fff;font-size:12px;font-weight:700;color:#3d3d5c;white-space:nowrap;flex-shrink:0;transition:all .2s;}
+.step-chip .step-num{width:20px;height:20px;border-radius:50%;background:#e8edf5;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#3d3d5c;}
+.step-chip.active{border-color:#2d6be4;background:#2d6be4;color:#fff;}
 .step-chip.active .step-num{background:rgba(255,255,255,.25);color:#fff;}
 .step-chip.done{border-color:#2e7d52;background:#e6f4ec;color:#2e7d52;}
 .step-chip.done .step-num{background:#2e7d52;color:#fff;}
-
-/* 섹션 래퍼 */
 .section-wrap{border-radius:20px;padding:3px;margin-bottom:16px;}
 .step1-wrap{background:linear-gradient(135deg,#2d6be4,#5b8ef0);}
 .step2-wrap{background:linear-gradient(135deg,#2e7d52,#52a876);}
 .step3-wrap{background:linear-gradient(135deg,#e67e22,#f0a050);}
 .step4-wrap{background:linear-gradient(135deg,#7b4fcf,#a07ae0);}
-.section-inner{background:#ffffff;border-radius:18px;padding:20px;}
-
+.section-inner{background:#fff;border-radius:18px;padding:20px;}
 .section-header{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
 .section-badge{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;}
 .step1-wrap .section-badge{background:#2d6be4;}
@@ -62,60 +38,40 @@ font-size:10px;font-weight:700;color:#3d3d5c;
 .step3-wrap .section-badge{background:#e67e22;}
 .step4-wrap .section-badge{background:#7b4fcf;}
 .section-title{font-size:14px;font-weight:700;color:#1a1a2e;}
-
-/* 입력 */
 .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 @media(max-width:520px){.input-grid{grid-template-columns:1fr;}}
 .input-block{display:flex;flex-direction:column;gap:8px;}
 .input-label{font-size:12px;font-weight:700;color:#1a1a2e;}
 .input-label small{font-size:10px;font-weight:400;color:#8890a4;margin-left:4px;}
-
-/* 파일 업로드 */
-.upload-area{
-border:2px dashed #d8e2f0;border-radius:12px;
-padding:12px 14px;background:#f4f7ff;
-cursor:pointer;transition:all .2s;position:relative;
-}
+.upload-area{border:2px dashed #d8e2f0;border-radius:12px;padding:12px 14px;background:#f4f7ff;cursor:pointer;transition:all .2s;position:relative;}
 .upload-area.has-file{border-style:solid;border-color:#2e7d52;background:#e6f4ec;}
 .upload-inner{display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .upload-icon-text{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#2d6be4;}
 .upload-area.has-file .upload-icon-text{color:#2e7d52;}
-.upload-change{font-size:10px;color:#8890a4;background:#fff;border:1px solid #d8e2f0;border-radius:4px;padding:2px 8px;cursor:pointer;white-space:nowrap;position:relative;z-index:3;-webkit-tap-highlight-color:transparent;}
+.upload-change{font-size:10px;color:#8890a4;background:#fff;border:1px solid #d8e2f0;border-radius:4px;padding:2px 8px;cursor:pointer;white-space:nowrap;position:relative;z-index:3;}
 .upload-area input[type=file]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;}
 .file-format{font-size:10px;color:#8890a4;margin-top:3px;}
-
-/* 미리보기 패널 */
 .preview-panel{border:1.5px solid #c5d8fb;border-radius:10px;background:#f4f7ff;overflow:hidden;margin-top:6px;display:none;}
 .preview-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#e8f0fe;border-bottom:1px solid #c5d8fb;}
 .preview-fname{font-size:11px;font-weight:700;color:#2d6be4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px;}
-.preview-edit-btn{font-size:10px;font-weight:600;color:#2d6be4;background:#fff;border:1px solid #c5d8fb;border-radius:6px;padding:3px 8px;cursor:pointer;font-family:‘Noto Sans KR’,sans-serif;white-space:nowrap;flex-shrink:0;}
+.preview-edit-btn{font-size:10px;font-weight:600;color:#2d6be4;background:#fff;border:1px solid #c5d8fb;border-radius:6px;padding:3px 8px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;white-space:nowrap;flex-shrink:0;}
 .preview-body{padding:10px 12px;font-size:11px;line-height:1.7;color:#3d3d5c;max-height:150px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;}
-
-.textarea-input{width:100%;border:1.5px solid #d8e2f0;border-radius:10px;padding:10px 12px;font-size:13px;font-family:‘Noto Sans KR’,sans-serif;color:#1a1a2e;background:#fafbff;outline:none;resize:vertical;min-height:200px;line-height:1.6;transition:border .15s;}
+.textarea-input{width:100%;border:1.5px solid #d8e2f0;border-radius:10px;padding:10px 12px;font-size:13px;font-family:'Noto Sans KR',sans-serif;color:#1a1a2e;background:#fafbff;outline:none;resize:vertical;min-height:200px;line-height:1.6;transition:border .15s;}
 .textarea-input:focus{border-color:#5b8ef0;background:#fff;box-shadow:0 0 0 3px rgba(45,107,228,.08);}
-
-/* 버튼 */
-.primary-btn{width:100%;padding:14px;border-radius:12px;border:none;color:#fff;font-size:15px;font-weight:700;font-family:‘Noto Sans KR’,sans-serif;cursor:pointer;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,.12);}
+.primary-btn{width:100%;padding:14px;border-radius:12px;border:none;color:#fff;font-size:15px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,.12);}
 .btn-blue{background:#2d6be4;}
 .btn-orange{background:#e67e22;}
-.btn-purple{background:#7b4fcf;}
 .primary-btn:disabled{background:#b0c4e8;box-shadow:none;cursor:not-allowed;}
-.outline-btn{width:100%;padding:13px;border-radius:12px;border:2px solid #2e7d52;background:#fff;color:#2e7d52;font-size:14px;font-weight:700;font-family:‘Noto Sans KR’,sans-serif;cursor:pointer;margin-bottom:16px;}
-
-/* 결과 */
+.outline-btn{width:100%;padding:13px;border-radius:12px;border:2px solid #2e7d52;background:#fff;color:#2e7d52;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;margin-bottom:16px;}
 .result-wrap{display:none;}
 .result-wrap.show{display:block;animation:fadeUp .3s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* 점수 */
 .score-box{display:flex;align-items:center;gap:16px;padding:16px;background:#e8f0fe;border-radius:14px;margin-bottom:14px;border:1px solid #c5d8fb;}
 .score-circle{width:76px;height:76px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(45,107,228,.2);flex-shrink:0;}
 .score-num{font-size:26px;font-weight:700;color:#2d6be4;line-height:1;}
 .score-sub{font-size:9px;color:#8890a4;margin-top:2px;}
 .score-bar-wrap{height:8px;background:#d8e2f0;border-radius:4px;overflow:hidden;margin:6px 0;}
 .score-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#2d6be4,#5b8ef0);transition:width .8s ease;}
-
-/* 분석 블록 */
 .a-block{background:#fafbff;border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #d8e2f0;}
 .a-block-title{font-size:12px;font-weight:700;margin-bottom:8px;}
 .a-block-title.blue{color:#2d6be4;}
@@ -123,28 +79,20 @@ cursor:pointer;transition:all .2s;position:relative;
 .a-block-title.red{color:#c0392b;}
 .a-block-title.orange{color:#e67e22;}
 .a-text{font-size:13px;line-height:1.8;color:#3d3d5c;white-space:pre-wrap;}
-
-/* 키워드 */
 .kw-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
 .tag{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;}
 .tag-ok{background:#e6f4ec;color:#2e7d52;border:1px solid #a8d5b8;}
 .tag-no{background:#fdecea;color:#c0392b;border:1px solid #f5b8b3;}
-
-/* 질문 */
 .q-item{background:#fafbff;border-radius:10px;padding:12px;margin-bottom:10px;border:1px solid #d8e2f0;}
 .q-text{font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:6px;}
-.q-input{width:100%;border:1.5px solid #d8e2f0;border-radius:8px;padding:8px 12px;font-size:13px;font-family:‘Noto Sans KR’,sans-serif;color:#1a1a2e;background:#fff;outline:none;resize:none;min-height:64px;}
+.q-input{width:100%;border:1.5px solid #d8e2f0;border-radius:8px;padding:8px 12px;font-size:13px;font-family:'Noto Sans KR',sans-serif;color:#1a1a2e;background:#fff;outline:none;resize:none;min-height:64px;}
 .q-input:focus{border-color:#e67e22;}
-
-/* 최종 */
 .final-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #d8e2f0;}
 .final-title{font-size:13px;font-weight:700;color:#7b4fcf;}
 .btn-row{display:flex;gap:6px;}
-.copy-btn{padding:6px 12px;border-radius:6px;border:1px solid #d8b4fe;background:#f0ebff;color:#7b4fcf;font-size:11px;font-weight:700;cursor:pointer;font-family:‘Noto Sans KR’,sans-serif;}
-.share-btn{padding:6px 12px;border-radius:6px;border:none;background:#7b4fcf;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:‘Noto Sans KR’,sans-serif;}
+.copy-btn{padding:6px 12px;border-radius:6px;border:1px solid #d8b4fe;background:#f0ebff;color:#7b4fcf;font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;}
+.share-btn{padding:6px 12px;border-radius:6px;border:none;background:#7b4fcf;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;}
 .final-text{font-size:13px;line-height:1.9;color:#1a1a2e;white-space:pre-wrap;}
-
-/* 토스트 */
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:12px;font-size:13px;font-weight:700;color:#fff;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;}
 .toast.success{background:#2e7d52;}
@@ -156,22 +104,19 @@ cursor:pointer;transition:all .2s;position:relative;
 .loading-text{font-size:15px;color:#1a1a2e;font-weight:700;text-align:center;}
 .loading-sub{font-size:12px;color:#8890a4;}
 </style>
-
 </head>
 <body>
 
 <header>
   <div><span class="logo">Resume A.I.</span><span class="logo-sub">by 조병근</span></div>
-  <div class="ai-badge">✨ AI 분석</div>
+  <div class="ai-badge">AI 분석</div>
 </header>
 
 <div class="security-banner">
-  <span class="security-text">🔒 입력하신 이력서와 JD는 서버에 저장되지 않습니다. AI 분석 후 즉시 삭제되며, 분석 목적으로만 사용됩니다.</span>
+  <span class="security-text">입력하신 이력서와 JD는 서버에 저장되지 않습니다. AI 분석 후 즉시 삭제되며, 분석 목적으로만 사용됩니다.</span>
 </div>
 
 <div class="main">
-
-  <!-- 단계 칩 -->
 
   <div class="steps">
     <div class="step-chip active" id="step1"><div class="step-num">1</div>입력</div>
@@ -179,8 +124,6 @@ cursor:pointer;transition:all .2s;position:relative;
     <div class="step-chip" id="step3"><div class="step-num">3</div>보완 질문</div>
     <div class="step-chip" id="step4"><div class="step-num">4</div>이력서 재작성</div>
   </div>
-
-  <!-- STEP 1 입력 -->
 
   <div class="section-wrap step1-wrap">
     <div class="section-inner">
@@ -191,7 +134,6 @@ cursor:pointer;transition:all .2s;position:relative;
       <div class="input-grid">
 
 ```
-    <!-- 이력서 -->
     <div class="input-block">
       <div class="input-label">이력서 <small>텍스트 입력 또는 파일 업로드</small></div>
       <div class="upload-area" id="resumeArea">
@@ -201,18 +143,17 @@ cursor:pointer;transition:all .2s;position:relative;
         </div>
         <input type="file" id="resumeFile" accept=".txt,.docx,.md">
       </div>
-      <div class="file-format">지원: TXT · Word(.docx) · 마크다운 | PDF는 텍스트 복사 후 붙여넣기</div>
+      <div class="file-format">지원: TXT, Word(.docx), 마크다운 | PDF는 텍스트 복사 후 붙여넣기</div>
       <div class="preview-panel" id="resumePreview">
         <div class="preview-header">
           <span class="preview-fname" id="resumeFname"></span>
-          <button type="button" class="preview-edit-btn" id="resumeEditBtn">✏️ 직접 수정</button>
+          <button type="button" class="preview-edit-btn" id="resumeEditBtn">수정</button>
         </div>
         <div class="preview-body" id="resumePreviewBody"></div>
       </div>
-      <textarea class="textarea-input" id="resumeText" placeholder="이력서 내용을 여기에 붙여넣거나 직접 입력해주세요.&#10;&#10;파일 업로드 시 텍스트가 자동 추출됩니다.&#10;추출 후 직접 수정도 가능해요."></textarea>
+      <textarea class="textarea-input" id="resumeText" placeholder="이력서 내용을 여기에 붙여넣거나 직접 입력해주세요."></textarea>
     </div>
 
-    <!-- JD -->
     <div class="input-block">
       <div class="input-label">채용공고 (JD) <small>텍스트 입력 또는 파일 업로드</small></div>
       <div class="upload-area" id="jdArea">
@@ -222,15 +163,15 @@ cursor:pointer;transition:all .2s;position:relative;
         </div>
         <input type="file" id="jdFile" accept=".txt,.docx,.md">
       </div>
-      <div class="file-format">지원: TXT · Word(.docx) · 마크다운 | PDF는 텍스트 복사 후 붙여넣기</div>
+      <div class="file-format">지원: TXT, Word(.docx), 마크다운 | PDF는 텍스트 복사 후 붙여넣기</div>
       <div class="preview-panel" id="jdPreview">
         <div class="preview-header">
           <span class="preview-fname" id="jdFname"></span>
-          <button type="button" class="preview-edit-btn" id="jdEditBtn">✏️ 직접 수정</button>
+          <button type="button" class="preview-edit-btn" id="jdEditBtn">수정</button>
         </div>
         <div class="preview-body" id="jdPreviewBody"></div>
       </div>
-      <textarea class="textarea-input" id="jdText" placeholder="채용공고 내용을 여기에 붙여넣거나 직접 입력해주세요.&#10;&#10;회사명, 직무, 자격요건, 우대사항 등을 포함해주세요."></textarea>
+      <textarea class="textarea-input" id="jdText" placeholder="채용공고 내용을 여기에 붙여넣거나 직접 입력해주세요."></textarea>
     </div>
 
   </div>
@@ -239,9 +180,7 @@ cursor:pointer;transition:all .2s;position:relative;
 
   </div>
 
-<button type="button" class="primary-btn btn-blue" id="analyzeBtn">🔍 분석 시작하기</button>
-
-  <!-- STEP 2 분석 결과 -->
+<button type="button" class="primary-btn btn-blue" id="analyzeBtn">분석 시작하기</button>
 
   <div class="result-wrap" id="resultWrap">
     <div class="section-wrap step2-wrap">
@@ -252,7 +191,7 @@ cursor:pointer;transition:all .2s;position:relative;
         </div>
         <div class="score-box">
           <div class="score-circle">
-            <div class="score-num" id="scoreNum">—</div>
+            <div class="score-num" id="scoreNum">-</div>
             <div class="score-sub">/ 100점</div>
           </div>
           <div style="flex:1;">
@@ -261,23 +200,21 @@ cursor:pointer;transition:all .2s;position:relative;
             <div style="font-size:11px;color:#8890a4;" id="scoreDesc"></div>
           </div>
         </div>
-        <div class="a-block"><div class="a-block-title blue">💪 강점 — 점수에 기여하는 요소</div><div class="a-text" id="strengthText"></div></div>
-        <div class="a-block"><div class="a-block-title red">⚠️ 약점 — 점수를 낮추는 요소</div><div class="a-text" id="weakText"></div></div>
+        <div class="a-block"><div class="a-block-title blue">강점 — 점수에 기여하는 요소</div><div class="a-text" id="strengthText"></div></div>
+        <div class="a-block"><div class="a-block-title red">약점 — 점수를 낮추는 요소</div><div class="a-text" id="weakText"></div></div>
         <div class="a-block">
-          <div class="a-block-title green">🔑 JD 키워드 매칭</div>
-          <div style="font-size:11px;font-weight:700;color:#3d3d5c;margin-bottom:4px;">✅ 이력서에 있는 키워드</div>
+          <div class="a-block-title green">JD 키워드 매칭</div>
+          <div style="font-size:11px;font-weight:700;color:#3d3d5c;margin-bottom:4px;">이력서에 있는 키워드</div>
           <div class="kw-tags" id="matchTags"></div>
-          <div style="font-size:11px;font-weight:700;color:#3d3d5c;margin:10px 0 4px;">❌ 이력서에 없는 키워드</div>
+          <div style="font-size:11px;font-weight:700;color:#3d3d5c;margin:10px 0 4px;">이력서에 없는 키워드</div>
           <div class="kw-tags" id="missTags"></div>
         </div>
-        <div class="a-block"><div class="a-block-title orange">📌 부족한 역량 & 보완 제안</div><div class="a-text" id="gapText"></div></div>
-        <div class="a-block"><div class="a-block-title blue">🗺️ 맞춤형 이력서 방향</div><div class="a-text" id="dirText"></div></div>
+        <div class="a-block"><div class="a-block-title orange">부족한 역량 & 보완 제안</div><div class="a-text" id="gapText"></div></div>
+        <div class="a-block"><div class="a-block-title blue">맞춤형 이력서 방향</div><div class="a-text" id="dirText"></div></div>
       </div>
     </div>
-    <button type="button" class="outline-btn" id="rewriteBtn">✏️ 이력서 재작성하기</button>
+    <button type="button" class="outline-btn" id="rewriteBtn">이력서 재작성하기</button>
   </div>
-
-  <!-- STEP 3 추가 질문 -->
 
   <div class="result-wrap" id="questionWrap">
     <div class="section-wrap step3-wrap">
@@ -290,16 +227,14 @@ cursor:pointer;transition:all .2s;position:relative;
         <div id="questionList"></div>
       </div>
     </div>
-    <button type="button" class="primary-btn btn-orange" id="finalBtn" style="margin-top:4px;">✨ 최적화 이력서 생성하기</button>
+    <button type="button" class="primary-btn btn-orange" id="finalBtn" style="margin-top:4px;">최적화 이력서 생성하기</button>
   </div>
-
-  <!-- STEP 4 재작성 이력서 -->
 
   <div class="result-wrap" id="finalWrap">
     <div class="section-wrap step4-wrap">
       <div class="section-inner">
         <div class="final-header">
-          <span class="final-title">📄 JD 최적화 이력서</span>
+          <span class="final-title">JD 최적화 이력서</span>
           <div class="btn-row">
             <button type="button" class="copy-btn" id="copyBtn">복사</button>
             <button type="button" class="share-btn" id="shareBtn">공유</button>
@@ -326,60 +261,64 @@ var analysisResult = null;
 var resumeContent = "";
 var jdContent = "";
 
-// 파일 업로드 셋업
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + (type || 'success') + ' show';
+  setTimeout(function() { t.classList.remove('show'); }, 3000);
+}
+
 function setupUpload(fileId, textareaId, areaId, uploadTxtId, changeTxtId, previewId, fnameId, bodyId, editBtnId) {
   document.getElementById(fileId).addEventListener('change', function() {
     var file = this.files[0];
-    if(!file) return;
+    if (!file) return;
     var area = document.getElementById(areaId);
     var uploadTxt = document.getElementById(uploadTxtId);
     var changeTxt = document.getElementById(changeTxtId);
     var preview = document.getElementById(previewId);
     var fname = document.getElementById(fnameId);
-    var body = document.getElementById(bodyId);
+    var bodyEl = document.getElementById(bodyId);
     var textarea = document.getElementById(textareaId);
 
     function onSuccess(text) {
-      if(!text || text.trim().length === 0) {
-        onFail('파일에서 텍스트를 읽을 수 없어요. 직접 붙여넣기 해주세요.');
+      if (!text || text.trim().length === 0) {
+        showToast('파일에서 텍스트를 읽을 수 없어요. 직접 붙여넣기 해주세요.', 'error');
         return;
       }
       textarea.value = text;
       textarea.style.display = 'none';
-      fname.textContent = '📄 ' + file.name;
-      body.textContent = text;
+      fname.textContent = file.name;
+      bodyEl.textContent = text;
       preview.style.display = 'block';
       area.classList.add('has-file');
-      uploadTxt.textContent = '📄 ' + file.name;
+      uploadTxt.textContent = file.name;
       changeTxt.style.display = 'inline';
-      showToast('✅ ' + file.name + ' 업로드 완료!', 'success');
-    }
-    function onFail(msg) {
-      area.classList.remove('has-file');
-      uploadTxt.textContent = '📎 파일 업로드';
-      changeTxt.style.display = 'none';
-      textarea.style.display = 'block';
-      showToast('⚠️ ' + (msg || '파일 읽기 실패 — 직접 붙여넣기 해주세요'), 'error');
+      showToast(file.name + ' 업로드 완료!', 'success');
     }
 
-    if(file.name.match(/\.(txt|md)$/i)) {
+    function onFail(msg) {
+      textarea.style.display = 'block';
+      showToast(msg || '파일 읽기 실패 — 직접 붙여넣기 해주세요', 'error');
+    }
+
+    if (file.name.match(/\.(txt|md)$/i)) {
       var r = new FileReader();
       r.onload = function(e) { onSuccess(e.target.result); };
       r.onerror = function() { onFail(); };
       r.readAsText(file, 'UTF-8');
-    } else if(file.name.match(/\.(docx)$/i)) {
+    } else if (file.name.match(/\.docx$/i)) {
       var r2 = new FileReader();
       r2.onload = function(e) {
         mammoth.extractRawText({ arrayBuffer: e.target.result })
           .then(function(res) { onSuccess(res.value); })
-          .catch(function() { onFail(); });
+          .catch(function() { onFail('Word 파일 읽기 실패 — 직접 붙여넣기 해주세요'); });
       };
       r2.onerror = function() { onFail(); };
       r2.readAsArrayBuffer(file);
-    } else if(file.name.match(/\.(doc)$/i)) {
-      onFail('⚠️ .doc 미지원 — .docx로 변환해주세요');
+    } else if (file.name.match(/\.doc$/i)) {
+      onFail('.doc는 지원되지 않아요. .docx로 변환 후 다시 시도해주세요.');
     } else {
-      onFail();
+      onFail('지원되지 않는 파일 형식이에요.');
     }
   });
 
@@ -391,132 +330,142 @@ function setupUpload(fileId, textareaId, areaId, uploadTxtId, changeTxtId, previ
   });
 }
 
-setupUpload('resumeFile','resumeText','resumeArea','resumeUploadTxt','resumeChangeTxt','resumePreview','resumeFname','resumePreviewBody','resumeEditBtn');
-setupUpload('jdFile','jdText','jdArea','jdUploadTxt','jdChangeTxt','jdPreview','jdFname','jdPreviewBody','jdEditBtn');
+setupUpload('resumeFile', 'resumeText', 'resumeArea', 'resumeUploadTxt', 'resumeChangeTxt', 'resumePreview', 'resumeFname', 'resumePreviewBody', 'resumeEditBtn');
+setupUpload('jdFile', 'jdText', 'jdArea', 'jdUploadTxt', 'jdChangeTxt', 'jdPreview', 'jdFname', 'jdPreviewBody', 'jdEditBtn');
 
-// 분석
 document.getElementById('analyzeBtn').addEventListener('click', function() {
   resumeContent = document.getElementById('resumeText').value.trim();
   jdContent = document.getElementById('jdText').value.trim();
-  if(!resumeContent) { alert('이력서를 입력해주세요!'); return; }
-  if(!jdContent) { alert('채용공고(JD)를 입력해주세요!'); return; }
-  showLoading('AI가 분석 중입니다','이력서와 JD를 비교하고 있어요...');
+  if (!resumeContent) { alert('이력서를 입력해주세요!'); return; }
+  if (!jdContent) { alert('채용공고(JD)를 입력해주세요!'); return; }
+  document.getElementById('loadingText').textContent = 'AI가 분석 중입니다';
+  document.getElementById('loadingSub').textContent = '이력서와 JD를 비교하고 있어요...';
+  document.getElementById('loadingOverlay').classList.add('show');
   document.getElementById('analyzeBtn').disabled = true;
   setStep(2);
   fetch(WORKER_URL + "/?type=analyze", {
-    method:"POST", headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({resume:resumeContent, jd:jdContent})
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ resume: resumeContent, jd: jdContent })
   })
-  .then(function(r){return r.json();})
-  .then(function(data){
-    hideLoading();
-    if(data.error){alert('분석 오류: '+data.error);document.getElementById('analyzeBtn').disabled=false;return;}
-    analysisResult=data;
-    renderAnalysis(data);
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    document.getElementById('loadingOverlay').classList.remove('show');
+    if (data.error) { alert('분석 오류: ' + data.error); document.getElementById('analyzeBtn').disabled = false; return; }
+    analysisResult = data;
+    var s = data.score || 0;
+    document.getElementById('scoreNum').textContent = s;
+    document.getElementById('scoreBar').style.width = s + '%';
+    document.getElementById('scoreDesc').textContent = s >= 70 ? '좋은 매칭이에요!' : s >= 50 ? '보완하면 경쟁력이 생겨요' : '핵심 역량 보강이 필요해요';
+    document.getElementById('strengthText').textContent = data.strengths || '';
+    document.getElementById('weakText').textContent = data.weaknesses || '';
+    document.getElementById('matchTags').innerHTML = (data.matchedKeywords || []).map(function(k) { return '<span class="tag tag-ok">' + k + '</span>'; }).join('');
+    document.getElementById('missTags').innerHTML = (data.missingKeywords || []).map(function(k) { return '<span class="tag tag-no">' + k + '</span>'; }).join('');
+    document.getElementById('gapText').textContent = data.gaps || '';
+    document.getElementById('dirText').textContent = data.direction || '';
     document.getElementById('resultWrap').classList.add('show');
-    document.getElementById('resultWrap').scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('resultWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
   })
-  .catch(function(){hideLoading();alert('오류가 발생했습니다.');document.getElementById('analyzeBtn').disabled=false;});
+  .catch(function() {
+    document.getElementById('loadingOverlay').classList.remove('show');
+    alert('오류가 발생했습니다.');
+    document.getElementById('analyzeBtn').disabled = false;
+  });
 });
 
-function renderAnalysis(d) {
-  var s = d.score||0;
-  document.getElementById('scoreNum').textContent = s;
-  document.getElementById('scoreBar').style.width = s+'%';
-  document.getElementById('scoreDesc').textContent = s>=70?'✅ 좋은 매칭이에요!':s>=50?'⚡ 보완하면 경쟁력이 생겨요':'📌 핵심 역량 보강이 필요해요';
-  document.getElementById('strengthText').textContent = d.strengths||'';
-  document.getElementById('weakText').textContent = d.weaknesses||'';
-  document.getElementById('matchTags').innerHTML = (d.matchedKeywords||[]).map(function(k){return '<span class="tag tag-ok">'+k+'</span>';}).join('');
-  document.getElementById('missTags').innerHTML = (d.missingKeywords||[]).map(function(k){return '<span class="tag tag-no">'+k+'</span>';}).join('');
-  document.getElementById('gapText').textContent = d.gaps||'';
-  document.getElementById('dirText').textContent = d.direction||'';
-}
-
-// 재작성
 document.getElementById('rewriteBtn').addEventListener('click', function() {
-  showLoading('추가 질문 생성 중','부족한 부분을 보완하기 위한 질문을 만들고 있어요...');
+  document.getElementById('loadingText').textContent = '추가 질문 생성 중';
+  document.getElementById('loadingSub').textContent = '부족한 부분을 보완하기 위한 질문을 만들고 있어요...';
+  document.getElementById('loadingOverlay').classList.add('show');
   setStep(3);
   fetch(WORKER_URL + "/?type=questions", {
-    method:"POST", headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({resume:resumeContent, jd:jdContent, analysis:analysisResult})
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ resume: resumeContent, jd: jdContent, analysis: analysisResult })
   })
-  .then(function(r){return r.json();})
-  .then(function(data){
-    hideLoading();
-    if(data.error){alert('오류: '+data.error);return;}
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    document.getElementById('loadingOverlay').classList.remove('show');
+    if (data.error) { alert('오류: ' + data.error); return; }
     var list = document.getElementById('questionList');
-    list.innerHTML = (data.questions||[]).map(function(q,i){
-      return '<div class="q-item"><div class="q-text">'+(i+1)+'. '+q+'</div><textarea class="q-input" id="qa'+i+'" placeholder="답변을 입력해주세요..."></textarea></div>';
+    var html = '';
+    var questions = data.questions || [];
+    for (var i = 0; i < questions.length; i++) {
+      html += '<div class="q-item"><div class="q-text">' + (i + 1) + '. ' + questions[i] + '</div><textarea class="q-input" id="qa' + i + '" placeholder="답변을 입력해주세요..."></textarea></div>';
 
 ```
-}).join('');
+}
+list.innerHTML = html;
 document.getElementById('questionWrap').classList.add('show');
-document.getElementById('questionWrap').scrollIntoView({behavior:'smooth',block:'start'});
+document.getElementById('questionWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
 ```
 
 })
-.catch(function(){hideLoading();alert(‘오류가 발생했습니다.’);});
+.catch(function() {
+document.getElementById(‘loadingOverlay’).classList.remove(‘show’);
+alert(‘오류가 발생했습니다.’);
+});
 });
 
-// 최종
 document.getElementById(‘finalBtn’).addEventListener(‘click’, function() {
 var qas = [];
-document.querySelectorAll(’.q-item’).forEach(function(item,i){
-qas.push({question:item.querySelector(’.q-text’).textContent, answer:document.getElementById(‘qa’+i).value});
-});
-showLoading(‘이력서 재작성 중’,‘JD에 최적화된 이력서를 만들고 있어요…’);
+var items = document.querySelectorAll(’.q-item’);
+for (var i = 0; i < items.length; i++) {
+var qa = document.getElementById(‘qa’ + i);
+qas.push({ question: items[i].querySelector(’.q-text’).textContent, answer: qa ? qa.value : ‘’ });
+}
+document.getElementById(‘loadingText’).textContent = ‘이력서 재작성 중’;
+document.getElementById(‘loadingSub’).textContent = ‘JD에 최적화된 이력서를 만들고 있어요…’;
+document.getElementById(‘loadingOverlay’).classList.add(‘show’);
 setStep(4);
 fetch(WORKER_URL + “/?type=rewrite”, {
-method:“POST”, headers:{“Content-Type”:“application/json”},
-body:JSON.stringify({resume:resumeContent, jd:jdContent, analysis:analysisResult, qas:qas})
+method: “POST”,
+headers: { “Content-Type”: “application/json” },
+body: JSON.stringify({ resume: resumeContent, jd: jdContent, analysis: analysisResult, qas: qas })
 })
-.then(function(r){return r.json();})
-.then(function(data){
-hideLoading();
-if(data.error){alert(‘오류: ‘+data.error);return;}
-document.getElementById(‘finalText’).textContent = data.resume||’’;
+.then(function(r) { return r.json(); })
+.then(function(data) {
+document.getElementById(‘loadingOverlay’).classList.remove(‘show’);
+if (data.error) { alert(’오류: ’ + data.error); return; }
+document.getElementById(‘finalText’).textContent = data.resume || ‘’;
 document.getElementById(‘finalWrap’).classList.add(‘show’);
-document.getElementById(‘finalWrap’).scrollIntoView({behavior:‘smooth’,block:‘start’});
+document.getElementById(‘finalWrap’).scrollIntoView({ behavior: ‘smooth’, block: ‘start’ });
 })
-.catch(function(){hideLoading();alert(‘오류가 발생했습니다.’);});
+.catch(function() {
+document.getElementById(‘loadingOverlay’).classList.remove(‘show’);
+alert(‘오류가 발생했습니다.’);
+});
 });
 
-// 복사/공유
-document.getElementById(‘copyBtn’).addEventListener(‘click’, function(){
-navigator.clipboard.writeText(document.getElementById(‘finalText’).textContent).then(function(){
-var btn=document.getElementById(‘copyBtn’);btn.textContent=‘✅ 됐어요’;
-setTimeout(function(){btn.textContent=‘복사’;},2000);
+document.getElementById(‘copyBtn’).addEventListener(‘click’, function() {
+navigator.clipboard.writeText(document.getElementById(‘finalText’).textContent).then(function() {
+var btn = document.getElementById(‘copyBtn’);
+btn.textContent = ‘복사됐어요’;
+setTimeout(function() { btn.textContent = ‘복사’; }, 2000);
 });
-});
-document.getElementById(‘shareBtn’).addEventListener(‘click’, function(){
-var text=document.getElementById(‘finalText’).textContent;
-if(navigator.share){navigator.share({title:‘JD 최적화 이력서’,text:text}).catch(function(){});}
-else{navigator.clipboard.writeText(text).then(function(){
-var btn=document.getElementById(‘shareBtn’);btn.textContent=‘✅ 복사됐어요’;
-setTimeout(function(){btn.textContent=‘공유’;},2000);
-});}
 });
 
-function showToast(msg, type) {
-var t = document.getElementById(‘toast’);
-t.textContent = msg;
-t.className = ‘toast ’ + (type||‘success’) + ’ show’;
-setTimeout(function() { t.classList.remove(‘show’); }, 3000);
-}
-function setStep(n){
-[1,2,3,4].forEach(function(i){
-var el=document.getElementById(‘step’+i);
-el.classList.remove(‘active’,‘done’);
-if(i<n) el.classList.add(‘done’);
-else if(i===n) el.classList.add(‘active’);
+document.getElementById(‘shareBtn’).addEventListener(‘click’, function() {
+var text = document.getElementById(‘finalText’).textContent;
+if (navigator.share) {
+navigator.share({ title: ‘JD 최적화 이력서’, text: text }).catch(function() {});
+} else {
+navigator.clipboard.writeText(text).then(function() {
+var btn = document.getElementById(‘shareBtn’);
+btn.textContent = ‘복사됐어요’;
+setTimeout(function() { btn.textContent = ‘공유’; }, 2000);
 });
 }
-function showLoading(t,s){
-document.getElementById(‘loadingText’).textContent=t;
-document.getElementById(‘loadingSub’).textContent=s;
-document.getElementById(‘loadingOverlay’).classList.add(‘show’);
+});
+
+function setStep(n) {
+for (var i = 1; i <= 4; i++) {
+var el = document.getElementById(‘step’ + i);
+el.classList.remove(‘active’, ‘done’);
+if (i < n) el.classList.add(‘done’);
+else if (i === n) el.classList.add(‘active’);
 }
-function hideLoading(){document.getElementById(‘loadingOverlay’).classList.remove(‘show’);}
+}
 </script>
 
 </body>

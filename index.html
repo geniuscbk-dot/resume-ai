@@ -86,6 +86,15 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;heig
 .upload-area input[type=file]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;}
 .file-format{font-size:10px;color:var(–text-muted);margin-top:3px;}
 
+.preview-panel{border:1.5px solid var(–blue-soft);border-radius:10px;background:var(–blue-wash);overflow:hidden;margin-top:4px;}
+.preview-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(–blue-pale);border-bottom:1px solid var(–blue-soft);}
+.preview-title{font-size:11px;font-weight:700;color:var(–blue);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px;}
+.preview-edit-btn{font-size:10px;font-weight:600;color:var(–blue);background:#fff;border:1px solid var(–blue-soft);border-radius:6px;padding:3px 8px;cursor:pointer;font-family:‘Noto Sans KR’,sans-serif;white-space:nowrap;flex-shrink:0;}
+.preview-panel{border:1.5px solid var(–blue-soft);border-radius:10px;background:var(–blue-wash);overflow:hidden;margin-top:4px;}
+.preview-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(–blue-pale);border-bottom:1px solid var(–blue-soft);}
+.preview-title{font-size:11px;font-weight:700;color:var(–blue);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px;}
+.preview-edit-btn{font-size:10px;font-weight:600;color:var(–blue);background:#fff;border:1px solid var(–blue-soft);border-radius:6px;padding:3px 8px;cursor:pointer;font-family:‘Noto Sans KR’,sans-serif;white-space:nowrap;flex-shrink:0;}
+.preview-text{padding:10px 12px;font-size:11px;line-height:1.7;color:var(–text-soft);max-height:160px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;}
 .textarea-input{width:100%;border:1.5px solid var(–border);border-radius:10px;padding:10px 12px;font-size:13px;font-family:‘Noto Sans KR’,sans-serif;color:var(–text);background:#fafbff;outline:none;resize:vertical;min-height:200px;line-height:1.6;transition:border .15s;}
 .textarea-input:focus{border-color:var(–blue-mid);background:#fff;box-shadow:0 0 0 3px rgba(45,107,228,.08);}
 
@@ -209,6 +218,13 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;heig
             <input type="file" id="resumeFile" accept=".pdf,.txt,.docx,.doc,.md">
           </div>
           <div class="file-format">지원: TXT · Word(.docx) · 마크다운(.md) | PDF는 텍스트 복사 후 붙여넣기 권장</div>
+          <div class="preview-panel" id="resumePreview" style="display:none;">
+            <div class="preview-header">
+              <span class="preview-title" id="resumePreviewTitle"></span>
+              <button type="button" class="preview-edit-btn" id="resumeEditBtn">✏️ 직접 수정</button>
+            </div>
+            <div class="preview-text" id="resumePreviewText"></div>
+          </div>
           <textarea class="textarea-input" id="resumeText" placeholder="이력서 내용을 여기에 붙여넣거나 직접 입력해주세요.&#10;&#10;파일 업로드 시 텍스트가 자동 추출됩니다.&#10;추출 후 직접 수정도 가능해요."></textarea>
         </div>
         <!-- JD -->
@@ -225,6 +241,13 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;heig
             <input type="file" id="jdFile" accept=".pdf,.txt,.docx,.doc,.md">
           </div>
           <div class="file-format">지원: TXT · Word(.docx) · 마크다운(.md) | PDF는 텍스트 복사 후 붙여넣기 권장</div>
+          <div class="preview-panel" id="jdPreview" style="display:none;">
+            <div class="preview-header">
+              <span class="preview-title" id="jdPreviewTitle"></span>
+              <button type="button" class="preview-edit-btn" id="jdEditBtn">✏️ 직접 수정</button>
+            </div>
+            <div class="preview-text" id="jdPreviewText"></div>
+          </div>
           <textarea class="textarea-input" id="jdText" placeholder="채용공고 내용을 여기에 붙여넣거나 직접 입력해주세요.&#10;&#10;회사명, 직무, 자격요건, 우대사항 등을&#10;포함해주세요."></textarea>
         </div>
       </div>
@@ -336,15 +359,28 @@ var jdContent = "";
 
 // 파일 업로드
 function setupFileUpload(fileId, textareaId, areaId, uploadTextId, changeBtnId) {
+  var previewId = fileId === 'resumeFile' ? 'resumePreview' : 'jdPreview';
+  var previewTitleId = fileId === 'resumeFile' ? 'resumePreviewTitle' : 'jdPreviewTitle';
+  var previewTextId = fileId === 'resumeFile' ? 'resumePreviewText' : 'jdPreviewText';
+  var editBtnId = fileId === 'resumeFile' ? 'resumeEditBtn' : 'jdEditBtn';
+
   document.getElementById(fileId).addEventListener('change', function() {
     var file = this.files[0];
     if(!file) return;
     var area = document.getElementById(areaId);
     var uploadText = document.getElementById(uploadTextId);
     var changeBtn = document.getElementById(changeBtnId);
+    var preview = document.getElementById(previewId);
+    var previewTitle = document.getElementById(previewTitleId);
+    var previewText = document.getElementById(previewTextId);
+    var textarea = document.getElementById(textareaId);
 
     function onSuccess(text) {
-      document.getElementById(textareaId).value = text;
+      textarea.value = text;
+      textarea.style.display = 'none';
+      previewTitle.textContent = file.name;
+      previewText.textContent = text;
+      preview.style.display = 'block';
       area.classList.add('has-file');
       uploadText.textContent = '📄 ' + file.name;
       changeBtn.style.display = 'inline';
@@ -353,6 +389,7 @@ function setupFileUpload(fileId, textareaId, areaId, uploadTextId, changeBtnId) 
       area.classList.add('has-file');
       uploadText.textContent = '⚠️ 직접 붙여넣기 필요';
       changeBtn.style.display = 'inline';
+      textarea.style.display = 'block';
     }
 
     if(file.name.match(/\.(txt|md)$/i)) {
@@ -370,13 +407,19 @@ function setupFileUpload(fileId, textareaId, areaId, uploadTextId, changeBtnId) 
       reader2.onerror = onFail;
       reader2.readAsArrayBuffer(file);
     } else if(file.name.match(/\.(doc)$/i)) {
-      // 구형 .doc는 mammoth 미지원 — 안내
       area.classList.add('has-file');
-      uploadText.textContent = '⚠️ .doc는 미지원 — .docx로 변환해주세요';
+      uploadText.textContent = '⚠️ .doc 미지원 — .docx로 변환해주세요';
       changeBtn.style.display = 'inline';
     } else {
       onFail();
     }
+  });
+
+  document.getElementById(editBtnId).addEventListener('click', function() {
+    document.getElementById(previewId).style.display = 'none';
+    var ta = document.getElementById(textareaId);
+    ta.style.display = 'block';
+    ta.focus();
   });
 }
 

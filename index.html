@@ -106,25 +106,20 @@ header{background:#fff;border-bottom:1px solid #d8e2f0;padding:0 20px;height:56p
 </style>
 </head>
 <body>
-
 <header>
   <div><span class="logo">Resume A.I.</span><span class="logo-sub">by 조병근</span></div>
   <div class="ai-badge">AI 분석</div>
 </header>
-
 <div class="security-banner">
   <span class="security-text">입력하신 이력서와 JD는 서버에 저장되지 않습니다. AI 분석 후 즉시 삭제되며, 분석 목적으로만 사용됩니다.</span>
 </div>
-
 <div class="main">
-
   <div class="steps">
     <div class="step-chip active" id="step1"><div class="step-num">1</div>입력</div>
     <div class="step-chip" id="step2"><div class="step-num">2</div>분석 결과</div>
     <div class="step-chip" id="step3"><div class="step-num">3</div>보완 질문</div>
     <div class="step-chip" id="step4"><div class="step-num">4</div>이력서 재작성</div>
   </div>
-
   <div class="section-wrap step1-wrap">
     <div class="section-inner">
       <div class="section-header">
@@ -132,56 +127,48 @@ header{background:#fff;border-bottom:1px solid #d8e2f0;padding:0 20px;height:56p
         <span class="section-title">이력서 & 채용공고 입력</span>
       </div>
       <div class="input-grid">
-
-```
-    <div class="input-block">
-      <div class="input-label">이력서 <small>텍스트 입력 또는 파일 업로드</small></div>
-      <div class="upload-area" id="resumeArea">
-        <div class="upload-inner">
-          <div class="upload-icon-text"><span>📎</span><span id="resumeUploadTxt">파일 업로드</span></div>
-          <span class="upload-change" id="resumeChangeTxt" style="display:none;">변경</span>
+        <div class="input-block">
+          <div class="input-label">이력서 <small>텍스트 입력 또는 파일 업로드</small></div>
+          <div class="upload-area" id="resumeArea">
+            <div class="upload-inner">
+              <div class="upload-icon-text"><span>📎</span><span id="resumeUploadTxt">파일 업로드</span></div>
+              <span class="upload-change" id="resumeChangeTxt" style="display:none;">변경</span>
+            </div>
+            <input type="file" id="resumeFile" accept=".txt,.docx,.md">
+          </div>
+          <div class="file-format">지원: TXT, Word(.docx), 마크다운 | PDF는 텍스트 복사 후 붙여넣기</div>
+          <div class="preview-panel" id="resumePreview">
+            <div class="preview-header">
+              <span class="preview-fname" id="resumeFname"></span>
+              <button type="button" class="preview-edit-btn" id="resumeEditBtn">수정</button>
+            </div>
+            <div class="preview-body" id="resumePreviewBody"></div>
+          </div>
+          <textarea class="textarea-input" id="resumeText" placeholder="이력서 내용을 여기에 붙여넣거나 직접 입력해주세요."></textarea>
         </div>
-        <input type="file" id="resumeFile" accept=".txt,.docx,.md">
-      </div>
-      <div class="file-format">지원: TXT, Word(.docx), 마크다운 | PDF는 텍스트 복사 후 붙여넣기</div>
-      <div class="preview-panel" id="resumePreview">
-        <div class="preview-header">
-          <span class="preview-fname" id="resumeFname"></span>
-          <button type="button" class="preview-edit-btn" id="resumeEditBtn">수정</button>
+        <div class="input-block">
+          <div class="input-label">채용공고 (JD) <small>텍스트 입력 또는 파일 업로드</small></div>
+          <div class="upload-area" id="jdArea">
+            <div class="upload-inner">
+              <div class="upload-icon-text"><span>📎</span><span id="jdUploadTxt">파일 업로드</span></div>
+              <span class="upload-change" id="jdChangeTxt" style="display:none;">변경</span>
+            </div>
+            <input type="file" id="jdFile" accept=".txt,.docx,.md">
+          </div>
+          <div class="file-format">지원: TXT, Word(.docx), 마크다운 | PDF는 텍스트 복사 후 붙여넣기</div>
+          <div class="preview-panel" id="jdPreview">
+            <div class="preview-header">
+              <span class="preview-fname" id="jdFname"></span>
+              <button type="button" class="preview-edit-btn" id="jdEditBtn">수정</button>
+            </div>
+            <div class="preview-body" id="jdPreviewBody"></div>
+          </div>
+          <textarea class="textarea-input" id="jdText" placeholder="채용공고 내용을 여기에 붙여넣거나 직접 입력해주세요."></textarea>
         </div>
-        <div class="preview-body" id="resumePreviewBody"></div>
       </div>
-      <textarea class="textarea-input" id="resumeText" placeholder="이력서 내용을 여기에 붙여넣거나 직접 입력해주세요."></textarea>
     </div>
-
-    <div class="input-block">
-      <div class="input-label">채용공고 (JD) <small>텍스트 입력 또는 파일 업로드</small></div>
-      <div class="upload-area" id="jdArea">
-        <div class="upload-inner">
-          <div class="upload-icon-text"><span>📎</span><span id="jdUploadTxt">파일 업로드</span></div>
-          <span class="upload-change" id="jdChangeTxt" style="display:none;">변경</span>
-        </div>
-        <input type="file" id="jdFile" accept=".txt,.docx,.md">
-      </div>
-      <div class="file-format">지원: TXT, Word(.docx), 마크다운 | PDF는 텍스트 복사 후 붙여넣기</div>
-      <div class="preview-panel" id="jdPreview">
-        <div class="preview-header">
-          <span class="preview-fname" id="jdFname"></span>
-          <button type="button" class="preview-edit-btn" id="jdEditBtn">수정</button>
-        </div>
-        <div class="preview-body" id="jdPreviewBody"></div>
-      </div>
-      <textarea class="textarea-input" id="jdText" placeholder="채용공고 내용을 여기에 붙여넣거나 직접 입력해주세요."></textarea>
-    </div>
-
   </div>
-</div>
-```
-
-  </div>
-
-<button type="button" class="primary-btn btn-blue" id="analyzeBtn">분석 시작하기</button>
-
+  <button type="button" class="primary-btn btn-blue" id="analyzeBtn">분석 시작하기</button>
   <div class="result-wrap" id="resultWrap">
     <div class="section-wrap step2-wrap">
       <div class="section-inner">
@@ -215,7 +202,6 @@ header{background:#fff;border-bottom:1px solid #d8e2f0;padding:0 20px;height:56p
     </div>
     <button type="button" class="outline-btn" id="rewriteBtn">이력서 재작성하기</button>
   </div>
-
   <div class="result-wrap" id="questionWrap">
     <div class="section-wrap step3-wrap">
       <div class="section-inner">
@@ -229,7 +215,6 @@ header{background:#fff;border-bottom:1px solid #d8e2f0;padding:0 20px;height:56p
     </div>
     <button type="button" class="primary-btn btn-orange" id="finalBtn" style="margin-top:4px;">최적화 이력서 생성하기</button>
   </div>
-
   <div class="result-wrap" id="finalWrap">
     <div class="section-wrap step4-wrap">
       <div class="section-inner">
@@ -244,17 +229,13 @@ header{background:#fff;border-bottom:1px solid #d8e2f0;padding:0 20px;height:56p
       </div>
     </div>
   </div>
-
 </div>
-
 <div class="toast" id="toast"></div>
-
 <div class="loading-overlay" id="loadingOverlay">
   <div class="loading-spinner"></div>
   <div class="loading-text" id="loadingText">AI가 분석 중입니다</div>
   <div class="loading-sub" id="loadingSub">이력서와 JD를 비교하고 있어요...</div>
 </div>
-
 <script>
 var WORKER_URL = "https://resume-ai.byungkuen.workers.dev";
 var analysisResult = null;
@@ -262,144 +243,136 @@ var resumeContent = "";
 var jdContent = "";
 
 function showToast(msg, type) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast ' + (type || 'success') + ' show';
-  setTimeout(function() { t.classList.remove('show'); }, 3000);
+var t = document.getElementById(‘toast’);
+t.textContent = msg;
+t.className = ‘toast ’ + (type || ‘success’) + ’ show’;
+setTimeout(function() { t.classList.remove(‘show’); }, 3000);
 }
 
 function setupUpload(fileId, textareaId, areaId, uploadTxtId, changeTxtId, previewId, fnameId, bodyId, editBtnId) {
-  document.getElementById(fileId).addEventListener('change', function() {
-    var file = this.files[0];
-    if (!file) return;
-    var area = document.getElementById(areaId);
-    var uploadTxt = document.getElementById(uploadTxtId);
-    var changeTxt = document.getElementById(changeTxtId);
-    var preview = document.getElementById(previewId);
-    var fname = document.getElementById(fnameId);
-    var bodyEl = document.getElementById(bodyId);
-    var textarea = document.getElementById(textareaId);
-
-    function onSuccess(text) {
-      if (!text || text.trim().length === 0) {
-        showToast('파일에서 텍스트를 읽을 수 없어요. 직접 붙여넣기 해주세요.', 'error');
-        return;
-      }
-      textarea.value = text;
-      textarea.style.display = 'none';
-      fname.textContent = file.name;
-      bodyEl.textContent = text;
-      preview.style.display = 'block';
-      area.classList.add('has-file');
-      uploadTxt.textContent = file.name;
-      changeTxt.style.display = 'inline';
-      showToast(file.name + ' 업로드 완료!', 'success');
-    }
-
-    function onFail(msg) {
-      textarea.style.display = 'block';
-      showToast(msg || '파일 읽기 실패 — 직접 붙여넣기 해주세요', 'error');
-    }
-
-    if (file.name.match(/\.(txt|md)$/i)) {
-      var r = new FileReader();
-      r.onload = function(e) { onSuccess(e.target.result); };
-      r.onerror = function() { onFail(); };
-      r.readAsText(file, 'UTF-8');
-    } else if (file.name.match(/\.docx$/i)) {
-      var r2 = new FileReader();
-      r2.onload = function(e) {
-        mammoth.extractRawText({ arrayBuffer: e.target.result })
-          .then(function(res) { onSuccess(res.value); })
-          .catch(function() { onFail('Word 파일 읽기 실패 — 직접 붙여넣기 해주세요'); });
-      };
-      r2.onerror = function() { onFail(); };
-      r2.readAsArrayBuffer(file);
-    } else if (file.name.match(/\.doc$/i)) {
-      onFail('.doc는 지원되지 않아요. .docx로 변환 후 다시 시도해주세요.');
-    } else {
-      onFail('지원되지 않는 파일 형식이에요.');
-    }
-  });
-
-  document.getElementById(editBtnId).addEventListener('click', function() {
-    document.getElementById(previewId).style.display = 'none';
-    var ta = document.getElementById(textareaId);
-    ta.style.display = 'block';
-    ta.focus();
-  });
+document.getElementById(fileId).addEventListener(‘change’, function() {
+var file = this.files[0];
+if (!file) return;
+var area = document.getElementById(areaId);
+var uploadTxt = document.getElementById(uploadTxtId);
+var changeTxt = document.getElementById(changeTxtId);
+var preview = document.getElementById(previewId);
+var fname = document.getElementById(fnameId);
+var bodyEl = document.getElementById(bodyId);
+var textarea = document.getElementById(textareaId);
+function onSuccess(text) {
+if (!text || text.trim().length === 0) {
+showToast(‘파일에서 텍스트를 읽을 수 없어요. 직접 붙여넣기 해주세요.’, ‘error’);
+return;
+}
+textarea.value = text;
+textarea.style.display = ‘none’;
+fname.textContent = file.name;
+bodyEl.textContent = text;
+preview.style.display = ‘block’;
+area.classList.add(‘has-file’);
+uploadTxt.textContent = file.name;
+changeTxt.style.display = ‘inline’;
+showToast(file.name + ’ 업로드 완료!’, ‘success’);
+}
+function onFail(msg) {
+textarea.style.display = ‘block’;
+showToast(msg || ‘파일 읽기 실패 — 직접 붙여넣기 해주세요’, ‘error’);
+}
+if (file.name.match(/.(txt|md)$/i)) {
+var r = new FileReader();
+r.onload = function(e) { onSuccess(e.target.result); };
+r.onerror = function() { onFail(); };
+r.readAsText(file, ‘UTF-8’);
+} else if (file.name.match(/.docx$/i)) {
+var r2 = new FileReader();
+r2.onload = function(e) {
+mammoth.extractRawText({ arrayBuffer: e.target.result })
+.then(function(res) { onSuccess(res.value); })
+.catch(function() { onFail(‘Word 파일 읽기 실패 — 직접 붙여넣기 해주세요’); });
+};
+r2.onerror = function() { onFail(); };
+r2.readAsArrayBuffer(file);
+} else if (file.name.match(/.doc$/i)) {
+onFail(’.doc는 지원되지 않아요. .docx로 변환 후 다시 시도해주세요.’);
+} else {
+onFail(‘지원되지 않는 파일 형식이에요.’);
+}
+});
+document.getElementById(editBtnId).addEventListener(‘click’, function() {
+document.getElementById(previewId).style.display = ‘none’;
+var ta = document.getElementById(textareaId);
+ta.style.display = ‘block’;
+ta.focus();
+});
 }
 
-setupUpload('resumeFile', 'resumeText', 'resumeArea', 'resumeUploadTxt', 'resumeChangeTxt', 'resumePreview', 'resumeFname', 'resumePreviewBody', 'resumeEditBtn');
-setupUpload('jdFile', 'jdText', 'jdArea', 'jdUploadTxt', 'jdChangeTxt', 'jdPreview', 'jdFname', 'jdPreviewBody', 'jdEditBtn');
+setupUpload(‘resumeFile’,‘resumeText’,‘resumeArea’,‘resumeUploadTxt’,‘resumeChangeTxt’,‘resumePreview’,‘resumeFname’,‘resumePreviewBody’,‘resumeEditBtn’);
+setupUpload(‘jdFile’,‘jdText’,‘jdArea’,‘jdUploadTxt’,‘jdChangeTxt’,‘jdPreview’,‘jdFname’,‘jdPreviewBody’,‘jdEditBtn’);
 
-document.getElementById('analyzeBtn').addEventListener('click', function() {
-  resumeContent = document.getElementById('resumeText').value.trim();
-  jdContent = document.getElementById('jdText').value.trim();
-  if (!resumeContent) { alert('이력서를 입력해주세요!'); return; }
-  if (!jdContent) { alert('채용공고(JD)를 입력해주세요!'); return; }
-  document.getElementById('loadingText').textContent = 'AI가 분석 중입니다';
-  document.getElementById('loadingSub').textContent = '이력서와 JD를 비교하고 있어요...';
-  document.getElementById('loadingOverlay').classList.add('show');
-  document.getElementById('analyzeBtn').disabled = true;
-  setStep(2);
-  fetch(WORKER_URL + "/?type=analyze", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ resume: resumeContent, jd: jdContent })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    document.getElementById('loadingOverlay').classList.remove('show');
-    if (data.error) { alert('분석 오류: ' + data.error); document.getElementById('analyzeBtn').disabled = false; return; }
-    analysisResult = data;
-    var s = data.score || 0;
-    document.getElementById('scoreNum').textContent = s;
-    document.getElementById('scoreBar').style.width = s + '%';
-    document.getElementById('scoreDesc').textContent = s >= 70 ? '좋은 매칭이에요!' : s >= 50 ? '보완하면 경쟁력이 생겨요' : '핵심 역량 보강이 필요해요';
-    document.getElementById('strengthText').textContent = data.strengths || '';
-    document.getElementById('weakText').textContent = data.weaknesses || '';
-    document.getElementById('matchTags').innerHTML = (data.matchedKeywords || []).map(function(k) { return '<span class="tag tag-ok">' + k + '</span>'; }).join('');
-    document.getElementById('missTags').innerHTML = (data.missingKeywords || []).map(function(k) { return '<span class="tag tag-no">' + k + '</span>'; }).join('');
-    document.getElementById('gapText').textContent = data.gaps || '';
-    document.getElementById('dirText').textContent = data.direction || '';
-    document.getElementById('resultWrap').classList.add('show');
-    document.getElementById('resultWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  })
-  .catch(function() {
-    document.getElementById('loadingOverlay').classList.remove('show');
-    alert('오류가 발생했습니다.');
-    document.getElementById('analyzeBtn').disabled = false;
-  });
+document.getElementById(‘analyzeBtn’).addEventListener(‘click’, function() {
+resumeContent = document.getElementById(‘resumeText’).value.trim();
+jdContent = document.getElementById(‘jdText’).value.trim();
+if (!resumeContent) { alert(‘이력서를 입력해주세요!’); return; }
+if (!jdContent) { alert(‘채용공고(JD)를 입력해주세요!’); return; }
+document.getElementById(‘loadingText’).textContent = ‘AI가 분석 중입니다’;
+document.getElementById(‘loadingSub’).textContent = ‘이력서와 JD를 비교하고 있어요…’;
+document.getElementById(‘loadingOverlay’).classList.add(‘show’);
+document.getElementById(‘analyzeBtn’).disabled = true;
+setStep(2);
+fetch(WORKER_URL + “/?type=analyze”, {
+method: “POST”,
+headers: { “Content-Type”: “application/json” },
+body: JSON.stringify({ resume: resumeContent, jd: jdContent })
+})
+.then(function(r) { return r.json(); })
+.then(function(data) {
+document.getElementById(‘loadingOverlay’).classList.remove(‘show’);
+if (data.error) { alert(‘분석 오류: ’ + data.error); document.getElementById(‘analyzeBtn’).disabled = false; return; }
+analysisResult = data;
+var s = data.score || 0;
+document.getElementById(‘scoreNum’).textContent = s;
+document.getElementById(‘scoreBar’).style.width = s + ‘%’;
+document.getElementById(‘scoreDesc’).textContent = s >= 70 ? ‘좋은 매칭이에요!’ : s >= 50 ? ‘보완하면 경쟁력이 생겨요’ : ‘핵심 역량 보강이 필요해요’;
+document.getElementById(‘strengthText’).textContent = data.strengths || ‘’;
+document.getElementById(‘weakText’).textContent = data.weaknesses || ‘’;
+document.getElementById(‘matchTags’).innerHTML = (data.matchedKeywords || []).map(function(k) { return ‘<span class="tag tag-ok">’ + k + ‘</span>’; }).join(’’);
+document.getElementById(‘missTags’).innerHTML = (data.missingKeywords || []).map(function(k) { return ‘<span class="tag tag-no">’ + k + ‘</span>’; }).join(’’);
+document.getElementById(‘gapText’).textContent = data.gaps || ‘’;
+document.getElementById(‘dirText’).textContent = data.direction || ‘’;
+document.getElementById(‘resultWrap’).classList.add(‘show’);
+document.getElementById(‘resultWrap’).scrollIntoView({ behavior: ‘smooth’, block: ‘start’ });
+})
+.catch(function() {
+document.getElementById(‘loadingOverlay’).classList.remove(‘show’);
+alert(‘오류가 발생했습니다.’);
+document.getElementById(‘analyzeBtn’).disabled = false;
+});
 });
 
-document.getElementById('rewriteBtn').addEventListener('click', function() {
-  document.getElementById('loadingText').textContent = '추가 질문 생성 중';
-  document.getElementById('loadingSub').textContent = '부족한 부분을 보완하기 위한 질문을 만들고 있어요...';
-  document.getElementById('loadingOverlay').classList.add('show');
-  setStep(3);
-  fetch(WORKER_URL + "/?type=questions", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ resume: resumeContent, jd: jdContent, analysis: analysisResult })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    document.getElementById('loadingOverlay').classList.remove('show');
-    if (data.error) { alert('오류: ' + data.error); return; }
-    var list = document.getElementById('questionList');
-    var html = '';
-    var questions = data.questions || [];
-    for (var i = 0; i < questions.length; i++) {
-      html += '<div class="q-item"><div class="q-text">' + (i + 1) + '. ' + questions[i] + '</div><textarea class="q-input" id="qa' + i + '" placeholder="답변을 입력해주세요..."></textarea></div>';
-
-```
+document.getElementById(‘rewriteBtn’).addEventListener(‘click’, function() {
+document.getElementById(‘loadingText’).textContent = ‘추가 질문 생성 중’;
+document.getElementById(‘loadingSub’).textContent = ‘부족한 부분을 보완하기 위한 질문을 만들고 있어요…’;
+document.getElementById(‘loadingOverlay’).classList.add(‘show’);
+setStep(3);
+fetch(WORKER_URL + “/?type=questions”, {
+method: “POST”,
+headers: { “Content-Type”: “application/json” },
+body: JSON.stringify({ resume: resumeContent, jd: jdContent, analysis: analysisResult })
+})
+.then(function(r) { return r.json(); })
+.then(function(data) {
+document.getElementById(‘loadingOverlay’).classList.remove(‘show’);
+if (data.error) { alert(’오류: ’ + data.error); return; }
+var list = document.getElementById(‘questionList’);
+var html = ‘’;
+var questions = data.questions || [];
+for (var i = 0; i < questions.length; i++) {
+html += ‘<div class="q-item"><div class="q-text">’ + (i+1) + ’. ’ + questions[i] + ‘</div><textarea class="q-input" id="qa' + i + '" placeholder="답변을 입력해주세요..."></textarea></div>’;
 }
 list.innerHTML = html;
-document.getElementById('questionWrap').classList.add('show');
-document.getElementById('questionWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
-```
-
+document.getElementById(‘questionWrap’).classList.add(‘show’);
+document.getElementById(‘questionWrap’).scrollIntoView({ behavior: ‘smooth’, block: ‘start’ });
 })
 .catch(function() {
 document.getElementById(‘loadingOverlay’).classList.remove(‘show’);
